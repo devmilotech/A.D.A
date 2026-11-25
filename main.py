@@ -1,7 +1,6 @@
 import speech_recognition as sr
 import pyttsx3
 from music import Play, Stop
-import tkinter as tk
 
 recognizer = sr.Recognizer()
 engine = pyttsx3.init()
@@ -12,9 +11,7 @@ def listen():
     with sr.Microphone() as source:
         recognizer.energy_threshold = 200
         recognizer.dynamic_energy_threshold = False
-
-        print("Listening...")
-
+        
         try:
             audio = recognizer.listen(
                 source,
@@ -34,11 +31,6 @@ def say(text):
     engine.say(text)
     engine.runAndWait()
     print(text)
-
-def desktop():
-    app = tk.Tk()
-    app.attributes('-fullscreen', True)
-    app.mainloop()
 
 while True:
     text = listen()
@@ -63,7 +55,3 @@ while True:
 
         elif "mute" in command:
             Stop()
-
-        elif "open" in command and "desktop" in command:
-            say("Opening the desk view sir")
-            desktop()
